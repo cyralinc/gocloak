@@ -49,13 +49,13 @@ There are a lot of backward incompatible changes:
 ### Installation
 
 ```shell
-go get github.com/Nerzal/gocloak/v7
+go get github.com/cyralinc/gocloak/v7
 ```
 
 ### Importing
 
 ```go
-	import "github.com/Nerzal/gocloak/v7"
+	import "github.com/cyralinc/gocloak/v7"
 ```
 
 ### Create New User

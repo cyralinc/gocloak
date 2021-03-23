@@ -314,6 +314,8 @@ type GoCloak interface {
 	UpdateIdentityProvider(ctx context.Context, token, realm, alias string, providerRep IdentityProviderRepresentation) error
 	// DeleteIdentityProvider deletes the identity provider in a realm
 	DeleteIdentityProvider(ctx context.Context, token, realm, alias string) error
+	// GetIdentityProviderConfig gets the identity provider in a realm
+	ExportIDPPublicBrokerConfig(ctx context.Context, token, realm, alias string) (*string, error)
 
 	// *** Protection API ***
 	// GetResource returns a client's resource with the given id

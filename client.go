@@ -14,7 +14,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/segmentio/ksuid"
 
-	"github.com/Nerzal/gocloak/v7/pkg/jwx"
+	"github.com/cyralinc/gocloak/v7/pkg/jwx"
 )
 
 type gocloak struct {
@@ -2263,6 +2263,21 @@ func (client *gocloak) UpdateIdentityProvider(ctx context.Context, token, realm,
 		Put(client.getAdminRealmURL(realm, "identity-provider", "instances", alias))
 
 	return checkForError(resp, err, errMessage)
+}
+
+// GetIdentityProviderConfig gets the identity provider in a realm
+func (client *gocloak) ExportIDPPublicBrokerConfig(ctx context.Context, token, realm, alias string) (*string, error) {
+	const errMessage = "could not get public identity provider configuration"
+
+	resp, err := client.getRequestWithBearerAuth(ctx, token).
+		Get(client.getAdminRealmURL(realm, "identity-provider", "instances", alias, "export"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return nil, err
+	}
+
+	result := resp.String()
+	return &result, nil
 }
 
 // DeleteIdentityProvider deletes the identity provider in a realm
