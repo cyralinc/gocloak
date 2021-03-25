@@ -1,8 +1,11 @@
-module github.com/Nerzal/gocloak/v8
+module github.com/cyralinc/gocloak/v8
 
 go 1.15
 
+replace github.com/Nerzal/gocloak/v8 => ./
+
 require (
+	github.com/Nerzal/gocloak/v8 v8.0.0-00010101000000-000000000000
 	github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1
 	github.com/go-resty/resty/v2 v2.3.0
 	github.com/pkg/errors v0.9.1
