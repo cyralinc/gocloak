@@ -2305,6 +2305,21 @@ func (client *gocloak) DeleteIdentityProvider(ctx context.Context, token, realm,
 	return checkForError(resp, err, errMessage)
 }
 
+// ExportIDPPublicBrokerConfig exports the broker config for a given alias
+func (client *gocloak) ExportIDPPublicBrokerConfig(ctx context.Context, token, realm, alias string) (*string, error) {
+	const errMessage = "could not get public identity provider configuration"
+
+	resp, err := client.getRequestWithBearerAuth(ctx, token).
+		Get(client.getAdminRealmURL(realm, "identity-provider", "instances", alias, "export"))
+
+	if err := checkForError(resp, err, errMessage); err != nil {
+		return nil, err
+	}
+
+	result := resp.String()
+	return &result, nil
+}
+
 // ImportIdentityProviderConfig parses and returns the identity provider config at a given URL
 func (client *gocloak) ImportIdentityProviderConfig(ctx context.Context, token, realm, fromURL, providerID string) (map[string]string, error) {
 	const errMessage = "could not import config"
