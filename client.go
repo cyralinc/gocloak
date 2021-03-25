@@ -2316,6 +2316,10 @@ func (client *gocloak) ExportIDPPublicBrokerConfig(ctx context.Context, token, r
 		return nil, err
 	}
 
+	if resp == nil || resp.String() == "" {
+		return nil, errors.New(errMessage)
+	}
+
 	result := resp.String()
 	return &result, nil
 }
